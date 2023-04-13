@@ -1,0 +1,62 @@
+Least Recently used needs to be removed
+We use two data structures to implement an LRU Cache.
+1) Deque
+2)Hashset to store which all elements are present.
+
+class LRUCache {
+
+ private Deque<Integer> doublyQueue;
+  private HashSet<Integer> hashset;
+  private final int CACHE_SIZE;
+  LRUCache(int capacity) {
+     doublyQueue = new LinkedList();
+     hashset = new Hashset();
+     CACHE_SIZE = 4;
+  
+  }
+  
+  public void enterElement(int element) {
+    if(!hashset.contains(element)) {
+        if(doublyQueue.size() == CACHE_SIZE) {
+           int lastElement = doublyQueue.removeLast();
+           hashset.remove(lastElement);
+        
+        }
+    
+    } else {
+        doublyQueue.remove(element);
+    
+    }
+    doublyQueue.push(element);
+    hashset.add(element);
+  
+  
+  }
+  
+  public void display() {
+    Iterator iterator = doublyQueue.iterator();
+    while(iterator.hasNext()) {
+      SOP(iterator.next());
+    
+    }
+  
+  }
+
+
+}
+
+class MainDemo {
+   public static void main(String[] args) {
+      LRUCache cache = new LRUCache(4);
+      cache.enterElement(1);
+      cache.enterElement(2);
+      cache.enterElement(3);
+      cache.enterElement(1);
+      cache.enterElement(4);
+      cache.enterElement(5);
+      cache.display();
+      
+   }
+
+
+}
